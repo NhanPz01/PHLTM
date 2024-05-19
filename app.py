@@ -20,7 +20,7 @@ def move_array(arr, number_of_times=1, reverse=False):
 
 
 def get_csv(file_path, has_header=True):
-    with open(file_path) as file:
+    with open(file_path, encoding='utf-8') as file:
         csv_reader = csv.reader(
             file,
             delimiter=",",
@@ -36,7 +36,6 @@ def get_csv(file_path, has_header=True):
             data.append(row)
 
         return data
-
 
 if __name__ == "__main__":
     args = sys.argv[1:]
