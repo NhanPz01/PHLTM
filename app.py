@@ -2,12 +2,20 @@ import csv
 import os
 import random
 import sys
+import pandas as pd
+
 
 SUPERVISOR_FILE = "./data/canbocoithi.csv"
 ROOM_FILE = "./data/phongthi.csv"
 LOBBY_DEVISION_FILE = "./result/danhsachgiamsat.csv"
 ROOM_DEVISION_FILE = "./result/danhsachphancong.csv"
 
+def csv_to_xlsx(csv_file_path, xlsx_file_path):
+    # Read the CSV data
+    data = pd.read_csv(csv_file_path)
+    
+    # Write the data to an XLSX file
+    data.to_excel(xlsx_file_path, index=False)
 
 def move_array(arr, number_of_times=1, reverse=False):
     for _ in range(number_of_times):
@@ -137,3 +145,7 @@ if __name__ == "__main__":
                     f"Từ {supervisor_room[0][0]} đến {supervisor_room[1][0]}",
                 ]
             )
+
+    # Convert the files
+    csv_to_xlsx(LOBBY_DEVISION_FILE, LOBBY_DEVISION_FILE.replace('.csv', '.xlsx'))
+    csv_to_xlsx(ROOM_DEVISION_FILE, ROOM_DEVISION_FILE.replace('.csv', '.xlsx'))

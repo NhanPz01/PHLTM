@@ -1,6 +1,10 @@
 import socket
 import os
 import threading
+import re
+
+def sanitize_filename(filename):
+    return re.sub(r'[\\/*?:"<>|]',"", filename)
 
 def handle_client(client_socket):
   while True:
@@ -9,7 +13,8 @@ def handle_client(client_socket):
     if not file_name:
       # No more files to receive
       break
-
+    
+    file_name = sanitize_filename(file_name)
     with open(os.path.join('data', file_name), 'wb') as file:
       print("đang nhận file: " + file_name)
       while True:
